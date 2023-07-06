@@ -9,7 +9,7 @@ Here's some links where you can see some of my works!
 
 https://gyazo.com/28859a67e7501e33a1d5d5793768df1b (Interactive world)
 
-https://streamable.com/1x5fdq (Pets mechanics)
+[https://streamable.com/1x5fdq](https://streamable.com/or7z91) (Pets mechanics)
 
 https://streamable.com/m42ea2 (Combat mechanic with knife)
 
