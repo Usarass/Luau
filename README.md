@@ -9,7 +9,7 @@ Here's some links where you can see some of my works!
 
 https://gyazo.com/28859a67e7501e33a1d5d5793768df1b (Interactive world)
 
-[https://streamable.com/1x5fdq](https://streamable.com/or7z91) (Pets mechanics)
+https://streamable.com/ijt6cg (Pets mechanics)
 
 https://streamable.com/m42ea2 (Combat mechanic with knife)
 
@@ -18,6 +18,8 @@ https://streamable.com/on9k11 (MGR Murasama sword)
 https://streamable.com/nx578i (Basketball throw)
 
 https://streamable.com/kw6r6x (Simple memory game)
+
+https://streamable.com/3ogfig (Samurai vs Zombies Copy)
 
 # Where you can see my places?
 Here's some links where you can see my places!
