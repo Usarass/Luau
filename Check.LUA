@@ -74,46 +74,45 @@ local hitboxes = { --A table that is used to create hitboxes. It take key as hit
 }
 
 local hitboxesPointsPosition = { --Table which contain hitbox points relatively to hitbox parent
-	['RightArmHitbox'] = {Vector3.new(0, -1, 0)},
+	['RightArmHitbox'] = {Vector3.new(0, -1, 0)}, --Point will be placed -1 on Y dimension relatively to it's parent
 	['LeftArmHitbox'] = {Vector3.new(0, -1, 0)},
 	['RightLegHitbox'] = {Vector3.new(0, -1, 0)},
 	['LeftLegHitbox'] = {Vector3.new(0, -1, 0)},
 	['TorsoHitBox'] = {Vector3.new(0, 0, 2), Vector3.new(2, 0, 2), Vector3.new(-2, 0, 2)}
 }
 
-local function clearHitboxes(hitboxesTable) --A function that clear hitboxes
-	for hitboxName, hitboxParams in next, hitboxesTable do --this loop destroy hitbox and clear table to create new hitboxes
-		hitboxParams[1]:Destroy()
+local function clearHitboxes(hitboxesTable)
+	for hitboxName, hitboxParams in next, hitboxesTable do
+		hitboxParams[1]:Destroy() --A RaycastHitbox module method that clears hitbox.
 		
-		table.clear(hitboxParams)
+		table.clear(hitboxParams) --a table method that clears hitboxParams to insert new params
 	end
 end
 
-local function PunchLanded(actionName, humanoid, playerUserId, inUltimate) --This function called when hit was landed
+local function PunchLanded(actionName, humanoid, playerUserId, inUltimate)
 	local enemyPlayer = Players:GetPlayerFromCharacter(humanoid.Parent)
 
-	if enemyPlayer == nil then --That checks if that's actual player or NPC
-		humanoid:TakeDamage(playersParameters[playerUserId].CurrentDamage)
+	if enemyPlayer == nil then --Checking if player is actual player
+		humanoid:TakeDamage(playersParameters[playerUserId].CurrentDamage) --Using humanoid TakeDamage method and as parameter I give varuable 'current damage' from table called playersParams
 
 		return
 	end
 	
 	local stunTime
 	
-	if inUltimate then --Checks if player in ULT
-		stunTime = AttackParameters.ULTIMATE_MOVES[actionName].STUN_TIME
+	if inUltimate then --Checking if player in ultimate and sets different stun time depending on this
+		stunTime = AttackParameters.ULTIMATE_MOVES[actionName].STUN_TIME 
 	else
 		stunTime = AttackParameters[actionName].STUN_TIME
 	end
 	
-	if playersParameters[enemyPlayer.UserId].Vulnerable then playersParameters[playerUserId].CurrentDamage *= VULNERABILITY_DEBUFF end --Checks if player have vulnerable effect
+	if playersParameters[enemyPlayer.UserId].Vulnerable then playersParameters[playerUserId].CurrentDamage *= VULNERABILITY_DEBUFF end --Checking if vulnerable varuable is True and if so it multiplies Current Damage Varuable by const
 
 	local enemyPlayerUserId = enemyPlayer.UserId
 	humanoid:TakeDamage(playersParameters[playerUserId].CurrentDamage)
 	
-	--Stun logic
 	playersParameters[enemyPlayerUserId].Stunned = true
-	humanoid.WalkSpeed = STUN_WALKSPEED
+	humanoid.WalkSpeed = STUN_WALKSPEED 
 	task.wait(stunTime)
 	humanoid.WalkSpeed = DEFAULT_MOVEMENT_SPEED
 	playersParameters[enemyPlayerUserId].Stunned = false
@@ -138,21 +137,21 @@ local actionOnHitFunctions = {
 		coroutine.wrap(function() --This function creates another thread and makes enemy fly away in other direction of his HRP lookVector
 			local enemyHumanoidRootPart = humanoid.Parent.HumanoidRootPart
 			
-			local linearVelocity = Instance.new('LinearVelocity', enemyHumanoidRootPart)
-			linearVelocity.Attachment0 = enemyHumanoidRootPart.RootAttachment
-			linearVelocity.MaxForce = math.huge
-			linearVelocity.VectorVelocity = enemyHumanoidRootPart.CFrame.lookVector * AttackParameters.ACTION_MOVE3.VELOCITY_MULTIPLIER --VELOCITY_MULTIPLIER is -40
+			local linearVelocity = Instance.new('LinearVelocity', enemyHumanoidRootPart) --Creating a linear velocity to move character and parenting it to character humanoid root part
+			linearVelocity.Attachment0 = enemyHumanoidRootPart.RootAttachment --Attachment0 is 'center' of the linear velocity
+			linearVelocity.MaxForce = math.huge --Setting  maxForce to math.huge so vector can apply much more magnitude 
+			linearVelocity.VectorVelocity = enemyHumanoidRootPart.CFrame.lookVector * AttackParameters.ACTION_MOVE3.VELOCITY_MULTIPLIER --Vector of velocity basically in this direction character will move
 			
 			task.wait(AttackParameters.ACTION_MOVE3.VELOCITY_DESTROY_TIME)
 			
-			linearVelocity:Destroy()
+			linearVelocity:Destroy() --Destroying velocity to stop it's affection on character humanoidRootPart
 		end)()
 		
-		coroutine.wrap(function()
+		coroutine.wrap(function() --Creating a new 'thread' so the next 3 lines of code will be completed on other thread. That means 'punchLanded' will be called immediatly. 
 			humanoid.Parent.RagdollTrigger.Value = true
 			task.wait(AttackParameters.ACTION_MOVE3.RAGDOLL_TIME)
 			humanoid.Parent.RagdollTrigger.Value = false
-		end)()
+		end)() --This thread was created to bypass task.wait() and call 'punchLanded' immediatly
 		
 		PunchLanded("ACTION_MOVE3", humanoid, playerUserId)
 	end,
