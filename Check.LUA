@@ -134,7 +134,7 @@ local actionOnHitFunctions = {
 	end,
 	
 	["ACTION_MOVE3"] = function(humanoid, playerUserId)
-		coroutine.wrap(function() --This function creates another thread and makes enemy fly away in other direction of his HRP lookVector
+		coroutine.wrap(function()
 			local enemyHumanoidRootPart = humanoid.Parent.HumanoidRootPart
 			
 			local linearVelocity = Instance.new('LinearVelocity', enemyHumanoidRootPart) --Creating a linear velocity to move character and parenting it to character humanoid root part
@@ -193,47 +193,47 @@ local actionOnHitFunctions = {
 }
 
 local function createHitboxes(character, playerUserId)
-	local params = RaycastParams.new() --Create new params and makes ray to ignore character
-	params.FilterDescendantsInstances = {character}
-	params.FilterType = Enum.RaycastFilterType.Exclude
+	local params = RaycastParams.new() --Creating new params which use to set filter to raycast
+	params.FilterDescendantsInstances = {character} --Putting character in filter table
+	params.FilterType = Enum.RaycastFilterType.Exclude --The ray will ignore character
 	
-	clearHitboxes(playersHitboxes[playerUserId]) --Clear hitboxes so we can create new hitboxes
+	clearHitboxes(playersHitboxes[playerUserId])
 	
-	for hitboxName, hitboxPart in next, hitboxes do --Loop that actually create hitboxes. 
-		local part = character[hitboxPart]
+	for hitboxName, hitboxPart in next, hitboxes do
+		local part = character[hitboxPart] --A part that will be used as hitbox parent
 		
-		playersHitboxes[playerUserId][hitboxName] = {RaycastHitbox.new(part), part} --Takes hitboxName as key and value is a table which first element is hitbox and second is his parent
+		playersHitboxes[playerUserId][hitboxName] = {RaycastHitbox.new(part), part} --Appending new table with hitbox name which 1 value is hitbox and 2 is hitbox parent
 	end
 	
 	for hitboxName, hitboxParams in next, playersHitboxes[playerUserId] do --Iterates through playerHitboxes table
 		hitboxParams[1]:SetPoints(hitboxParams[2], hitboxesPointsPosition[hitboxName]) --Set points where ray will be casted.
-		hitboxParams[1].RaycastParams = params --Sets ray params so he will ignore character
+		hitboxParams[1].RaycastParams = params --Setting raycast params, this ray will ignore character
 		
 		hitboxParams[1].OnHit:Connect(function(hit, humanoid)
 			local actionFunction
 			local CurrentAttackMove = playersParameters[playerUserId].CurrentAttackMove
 			
-			if playersParameters[playerUserId].UltimateActive then --Check if player in ULT
+			if playersParameters[playerUserId].UltimateActive then --Checking if player in ult if so then it will take function from 'Ultimate' table
 				actionFunction = actionOnHitFunctions.Ultimate[CurrentAttackMove] --Get function from "actionOnHitFunctions" table
-			else
-				actionFunction = actionOnHitFunctions[CurrentAttackMove] --Get function from "actionOnHitFunctions" table
+			else --If not it takes it from just 'actionOnHitFunctions' 
+				actionFunction = actionOnHitFunctions[CurrentAttackMove] 
 			end
 			
-			playersParameters[playerUserId].UltimatePoints += GameParameters.ULTIMATE_POINTS_ADDED_PER_HIT --Give player points if hit was succesful
-			if playersParameters[playerUserId].UltimatePoints > MAX_ULTIMATE_POINTS then playersParameters[playerUserId].UltimatePoints = MAX_ULTIMATE_POINTS end --Check if we have enought ultimate points to activate ultimate
+			playersParameters[playerUserId].UltimatePoints += GameParameters.ULTIMATE_POINTS_ADDED_PER_HIT
+			if playersParameters[playerUserId].UltimatePoints > MAX_ULTIMATE_POINTS then playersParameters[playerUserId].UltimatePoints = MAX_ULTIMATE_POINTS end --Checking if player have more ultimate points if so, it will set player ultimate points to maximum points
 			
-			UpdateUIBar:FireClient(Players:GetPlayerByUserId(playerUserId), playersParameters[playerUserId].UltimatePoints, MAX_ULTIMATE_POINTS) --This event upgrade Ultimate bar 
-			actionFunction(humanoid, playerUserId) --Call function from "actionOnHitFunctions" table
+			UpdateUIBar:FireClient(Players:GetPlayerByUserId(playerUserId), playersParameters[playerUserId].UltimatePoints, MAX_ULTIMATE_POINTS) --Updating ultimate bar depending on player points
+			actionFunction(humanoid, playerUserId) 
 		end)
 	end
 end
 
-Players.PlayerAdded:Connect(function(player) --This function is called when player joining
+Players.PlayerAdded:Connect(function(player)
 	local playerUserId = player.UserId
-	UpdateUIBar:FireClient(player, 0, MAX_ULTIMATE_POINTS) --Event upgrades ultimate bar second argument is current amount of ult points 
+	UpdateUIBar:FireClient(player, 0, MAX_ULTIMATE_POINTS)
 	
-	playersParameters[playerUserId] = PlayerParametersModule.new() --creates player parameters using player parameters module
-	playersHitboxes[playerUserId] = {} --creates a key-value with key of playerUserId and value of blank table
+	playersParameters[playerUserId] = PlayerParametersModule.new() 
+	playersHitboxes[playerUserId] = {} 
 	
 	playersCooldowns[playerUserId] = {
 		["ACTION_MOVE1"] = false,
@@ -242,7 +242,7 @@ Players.PlayerAdded:Connect(function(player) --This function is called when play
 		["ACTION_MOVE4"] = false
 	} --set up player cooldowns
 	
-	local character = player.Character or player.CharacterAdded:Wait() --Waitning for character
+	local character = player.Character or player.CharacterAdded:Wait() --A method that wait for character to then create hitboxes with this character
 	createHitboxes(character, playerUserId)
 	
 	player.CharacterAdded:Connect(function(character)
@@ -251,9 +251,9 @@ Players.PlayerAdded:Connect(function(player) --This function is called when play
 end)
 
 Players.PlayerRemoving:Connect(function(player)
+	--Nullifying all variables because they are useless when player disconnected so no memory leaks
 	local playerUserId = player.UserId
 	
-	--We nullifying all variables because they are useless when player disconnected so we don't have memory leaks
 	playersParameters[playerUserId] = nil 
 	playersCooldowns[playerUserId] = nil
 	
@@ -264,17 +264,16 @@ end)
 local function OnUltimateActivation(player)
 	local playerUserId = player.UserId
 	
-	local parameters = playersParameters[playerUserId] --Get table with player parameters
+	local parameters = playersParameters[playerUserId]
 	
 	if parameters.UltimateActive == false and parameters.UltimatePoints >= GameParameters.MAX_ULTIMATE_POINTS  then
 		coroutine.wrap(function()
 			local playerLeft
 			
-			while playersParameters[playerUserId].UltimatePoints > 0 do --This loop will work until we have zero ult points
+			while playersParameters[playerUserId].UltimatePoints > 0 do 
 				playersParameters[playerUserId].UltimatePoints -= GameParameters.ULTIMATE_POINTS_DECREASE_RATE
 				
 				UpdateUIBar:FireClient(player, playersParameters[playerUserId].UltimatePoints, MAX_ULTIMATE_POINTS)
-				
 				
 				task.wait(GameParameters.ULTIMATE_POINTS_DECREASE_TIME)
 				
@@ -298,7 +297,7 @@ local function OnUltimateActivation(player)
 	return false
 end
 
-ActivateUltimate.OnServerInvoke = OnUltimateActivation
+ActivateUltimate.OnServerInvoke = OnUltimateActivation --This type of events will return some value to client. In this example it returns true if ultimate turned on and false if not
 
 local existingActionsNames = {"ACTION_MOVE1", "ACTION_MOVE2", "ACTION_MOVE3", "ACTION_MOVE4"}
 
@@ -319,13 +318,13 @@ local actionNameToUltimateFunction = {
 AttackAction.OnServerEvent:Connect(function(player, attackName)
 	local playerUserId = player.UserId
 	
-	if table.find(existingActionsNames, attackName) == nil then print("Not found action name!") return end --Check if we have action name in "existingActionsNames" if not then return
-	if playersCooldowns[playerUserId][attackName] then print("Ability on cooldown!") return end --Check if player ability not on cooldown
-	if playersParameters[playerUserId].AttackOnProcess then print("Attack on process!") return end --Check if player have other attack on process
-	if playersParameters[playerUserId].Stunned then print("Player stunned") return end --Check if player is stunned
+	if table.find(existingActionsNames, attackName) == nil then print("Not found action name!") return end --Checking if we have action name in "existingActionsNames" if not then 'return' happens, it stops next lines execution
+	if playersCooldowns[playerUserId][attackName] then print("Ability on cooldown!") return end --Checking if field with Attack Name is true if it is then 'return' happens, it stops next lines execution
+	if playersParameters[playerUserId].AttackOnProcess then print("Attack on process!") return end --Checking if player varuable AttackOnProcess is true if it is then 'return' happens, it stops next lines execution
+	if playersParameters[playerUserId].Stunned then print("Player stunned") return end --Checking if player varuable stunned is true if it is then 'return' happens, it stops next lines execution
 	
-	playersCooldowns[playerUserId][attackName] = true
-	playersParameters[playerUserId].AttackOnProcess = true
+	playersCooldowns[playerUserId][attackName] = true --Turn on cooldown. Now field with attack name is true
+	playersParameters[playerUserId].AttackOnProcess = true 
 	
 	local ultimateActive = playersParameters[playerUserId].UltimateActive
 	
@@ -347,7 +346,7 @@ AttackAction.OnServerEvent:Connect(function(player, attackName)
 	
 	playersParameters[playerUserId].CurrentAttackMove = attackName
 	
-	AttackModule[attackFunctionName](AttackModule, playersHitboxes[playerUserId], player.Character, playersParameters) --Call a function from attack module!
+	AttackModule[attackFunctionName](AttackModule, playersHitboxes[playerUserId], player.Character, playersParameters)
 	
 	coroutine.wrap(function()
 		task.wait(processTime)
@@ -355,5 +354,5 @@ AttackAction.OnServerEvent:Connect(function(player, attackName)
 	end)()
 	
 	task.wait(abilityCooldown)
-	playersCooldowns[playerUserId][attackName] = false
+	playersCooldowns[playerUserId][attackName] = false --Turn off coldowd, ability is ready to use. Field with attack name is false
 end)
