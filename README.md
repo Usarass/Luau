@@ -1,8 +1,4 @@
-# What for? 
-This is a place where I showcase my luau scripts 
-
-# Pets Folder
-Folder where you can find my code for pets mechanics
+# Portfolio
 
 # Where you can see my work?
 Here's some links where you can see some of my works!
