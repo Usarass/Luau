@@ -1,6 +1,6 @@
 # Portfolio
 
-# Where you can see my work?
+# My works
 Here's some links where you can see some of my works!
 
 https://gyazo.com/28859a67e7501e33a1d5d5793768df1b (Interactive world)
@@ -17,7 +17,7 @@ https://streamable.com/kw6r6x (Simple memory game)
 
 https://streamable.com/3ogfig (Samurai vs Zombies Copy)
 
-# Where you can see my places?
+# My Places
 Here's some links where you can see my places!
 
 https://www.roblox.com/games/1577735636/External-Power **(Fighting game)**
