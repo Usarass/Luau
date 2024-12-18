@@ -74,8 +74,15 @@ In this game you should find ways to escape the room, there's a hidden timer and
 **Features**
 1. Interactive world
 2. Puzzles
-4. Cutscenes
+3. Cutscenes
+4. Flashlight
 
-Features of this place: smooth flashlight pull out, interactive world
+**- Guess It**
 
-May contain bugs
+**Description**
+This was inspired by tik tok videos of minecraft "Guess The Block". As you could imagine in this game you need to guess Minecraft blocks, but not only them, because this game has a feature which allows to add client guess games, so other players could add their guess games, which could relate not only to Minecarft but to other series, animes and etc...
+
+**Features**
+1. Apply promts
+2. Ability to create your own guess game
+3. Ability to see others answers
