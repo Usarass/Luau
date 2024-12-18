@@ -56,10 +56,12 @@ The genre is fighting. This game grants you different types of auras, which you 
 
 [Crazyiac House](https://www.roblox.com/games/9014261999/Crazyiac-house)
 
-**Description**
+**Description:**
+
 This game was made for roblox game jam! In this game you should find all keys and escape the house, this is derectives of Player One, while the other player before the round starts should set up different types of traps in order to stop player from getting all the keys and succesufuly escape from maniac house.
 
-**Features**
+**Features:**
+
 1. Item Placement
 2. Round Cycle 
 4. Remote traps activation
@@ -68,22 +70,27 @@ This game was made for roblox game jam! In this game you should find all keys an
 
 [Our Present](https://www.roblox.com/games/8383598123/Our-Present)
 
-**Description**
+**Description:**
+
 In this game you should find ways to escape the room, there's a hidden timer and if you don't made that in time, welp you dead. Believe in your intuition and found creative solutions to escape the room. They solutions could be crazy. For example: you can escape the room by using the classic glitch or by breaking the wall.
 
-**Features**
+**Features:**
+
 1. Interactive world
 2. Puzzles
 3. Cutscenes
 4. Flashlight
 
 **- Guess It**
+
 [Guess It](https://www.roblox.com/games/16653986060/Guess-It)
 
-**Description**
+**Description:**
+
 This was inspired by tik tok videos of minecraft "Guess The Block". As you could imagine in this game you need to guess Minecraft blocks, but not only them, because this game has a feature which allows to add client guess games, so other players could add their guess games, which could relate not only to Minecarft but to other series, animes and etc...
 
-**Features**
+**Features:**
+
 1. Apply promts
 2. Ability to create your own guess game
 3. Ability to see others answers
@@ -92,7 +99,8 @@ This was inspired by tik tok videos of minecraft "Guess The Block". As you could
 
 [Help me friends](https://www.roblox.com/games/13930772453/Help-Me-Friends)
 
-**Description**
+**Description:**
+
 This one was made for gamejam too! Here you should spawn units to protect yourself from enemies. Collect chests to summon new friends in order to protect yourself.
 
 **Features**
