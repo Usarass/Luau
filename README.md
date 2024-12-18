@@ -40,7 +40,7 @@ I would like to showcase some of my past games or places as roblox names them.
 
 **- External Power**
 
-[Roblox Link for External Power](https://www.roblox.com/games/1577735636/External-Power)
+[External Power](https://www.roblox.com/games/1577735636/External-Power)
 
 **Description**
 The genre is fighting. This game grants you different types of auras, which you could use to defend your opponents. This game is round based, so you should have other players involved to play a round. Also theres a 'Fruits' that gives you different types of buffs, but after a buff there comes a debuff for other characteristic of your character. For example: the more speed you have the less power you have. Try this with your friends, I think this pretty entertaining.
@@ -54,7 +54,7 @@ The genre is fighting. This game grants you different types of auras, which you 
 
 **- Crazyiac House**
 
-[Roblox Link for Crazyiac House](https://www.roblox.com/games/9014261999/Crazyiac-house)
+[Crazyiac House](https://www.roblox.com/games/9014261999/Crazyiac-house)
 
 **Description**
 This game was made for roblox game jam! In this game you should find all keys and escape the house, this is derectives of Player One, while the other player before the round starts should set up different types of traps in order to stop player from getting all the keys and succesufuly escape from maniac house.
@@ -66,7 +66,7 @@ This game was made for roblox game jam! In this game you should find all keys an
 
 **- Our Present**
 
-[Roblox Link for Our Present](https://www.roblox.com/games/8383598123/Our-Present)
+[Our Present](https://www.roblox.com/games/8383598123/Our-Present)
 
 **Description**
 In this game you should find ways to escape the room, there's a hidden timer and if you don't made that in time, welp you dead. Believe in your intuition and found creative solutions to escape the room. They solutions could be crazy. For example: you can escape the room by using the classic glitch or by breaking the wall.
@@ -78,6 +78,7 @@ In this game you should find ways to escape the room, there's a hidden timer and
 4. Flashlight
 
 **- Guess It**
+[Guess It](https://www.roblox.com/games/16653986060/Guess-It)
 
 **Description**
 This was inspired by tik tok videos of minecraft "Guess The Block". As you could imagine in this game you need to guess Minecraft blocks, but not only them, because this game has a feature which allows to add client guess games, so other players could add their guess games, which could relate not only to Minecarft but to other series, animes and etc...
@@ -86,3 +87,16 @@ This was inspired by tik tok videos of minecraft "Guess The Block". As you could
 1. Apply promts
 2. Ability to create your own guess game
 3. Ability to see others answers
+
+**- Help me friends**
+
+[Help me friends](https://www.roblox.com/games/13930772453/Help-Me-Friends)
+
+**Description**
+This one was made for gamejam too! Here you should spawn units to protect yourself from enemies. Collect chests to summon new friends in order to protect yourself.
+
+**Features**
+1. Spawn of enemies
+2. Different types of enemies
+3. Different types of friends
+4. Different types of loot that are coming from chests
